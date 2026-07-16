@@ -51,10 +51,30 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
+vim.cmd([[colorscheme gruvbox]])
+
 require('nvim-treesitter').setup({
   highlight = { enable = true },
   indent = { enable = true },
 })
+
+require("toggleterm").setup({
+  size = 20,                   -- The height of the bottom terminal split
+  open_mapping = [[<c-\>]],    -- Press Ctrl + \ to toggle open/close
+  direction = 'horizontal',    -- Position it at the bottom half of the screen
+})
+
+require("neo-tree").setup({
+  close_if_last_window = true, -- Close Neo-tree if it's the last window open
+  window = {
+    width = 30,
+    mappings = {
+      ["<space>"] = "none",    -- Disable space mapping so it doesn't conflict with your leader key
+    }
+  }
+})
+
+vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { silent = true, desc = 'Toggle File Tree' })
 
 require("lualine").setup({
   options = {
