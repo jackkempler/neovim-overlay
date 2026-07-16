@@ -5,5 +5,6 @@ pkgs: with pkgs; [
   marksman
   bash-language-server
   dockerfile-language-server
+  wl-clipboard
 ]
 

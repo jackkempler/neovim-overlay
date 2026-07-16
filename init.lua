@@ -92,3 +92,17 @@ require("lualine").setup({
     icons_enabled = false
   }
 })
+-- Copy the entire terminal buffer history to the system clipboard
+vim.keymap.set('t', '<C-S-y>', function()
+  -- 1. Grab all lines in the current terminal buffer
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  local text = table.concat(lines, "\n")
+  
+  -- 2. Send them directly to your system clipboard (+ register)
+  vim.fn.setreg('+', text)
+  
+  -- 3. Print a quick confirmation message in the command line
+  print("Terminal history copied to clipboard!")
+end, { silent = true, desc = "Yank entire terminal history" })
+vim.opt.clipboard = "unnamedplus"
+
