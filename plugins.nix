@@ -7,4 +7,5 @@ pkgs: with pkgs.vimPlugins; [
   plenary-nvim
   nvim-web-devicons
   toggleterm-nvim
+  tiny-inline-diagnostic-nvim
 ]

@@ -74,6 +74,14 @@ require("neo-tree").setup({
   }
 })
 
+require("tiny-inline-diagnostic").setup({
+  preset = "nonerdfont", -- Uses standard characters instead of Nerd Font icons
+})
+
+vim.diagnostic.config({
+  virtual_text = false,
+})
+
 vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { silent = true, desc = 'Toggle File Tree' })
 
 require("lualine").setup({
