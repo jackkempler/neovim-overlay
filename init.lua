@@ -237,6 +237,10 @@ end, { silent = true, desc = "Toggle Diagnostic Severity Level" })
 -- Lualine with Clipboard Helper Component
 -- ====================================================================
 local function clipboard_preview()
+  if os.getenv("SSH_CONNECTION") or os.getenv("SSH_CLIENT") then
+    return ""
+  end
+
   local clipboard = vim.fn.getreg("+")
   if not clipboard or clipboard == "" then
     return ""
