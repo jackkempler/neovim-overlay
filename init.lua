@@ -132,10 +132,10 @@ local function smart_toggle_term()
 end
 
 -- Keybind: Space + t (leader t) in Normal Mode to focus/toggle terminal
-vim.keymap.set('n', '<leader>t', smart_toggle_term, { silent = true, desc = "Focus/Open Terminal" })
+vim.keymap.set('n', '<leader>ft', smart_toggle_term, { silent = true, desc = "Focus/Open Terminal" })
 
 -- Easily toggle back to the main buffer from inside terminal window using Space + t
-vim.keymap.set('t', '<leader>t', '<C-\\><C-n><C-w>p', { silent = true, desc = "Escape Terminal Focus" })
+vim.keymap.set('t', '<leader>ft', '<C-\\><C-n><C-w>p', { silent = true, desc = "Escape Terminal Focus" })
 
 -- ====================================================================
 -- File Tree (Neo-Tree) Setup
