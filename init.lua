@@ -9,6 +9,30 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.smarttab = true
+
+-- ====================================================================
+-- Dynamic Local (wl-clipboard) & Remote SSH (OSC 52) Clipboard Setup
+-- ====================================================================
+if os.getenv("SSH_CONNECTION") or os.getenv("SSH_CLIENT") then
+  -- We are SSH-ed into the Ubuntu VM -> Use OSC 52 to send yanks back to local Foot/Sway
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+    },
+    paste = {
+      ['+'] = require('vim.ui.clipboard.osc52').paste('+'),
+      ['*'] = require('vim.ui.clipboard.osc52').paste('*'),
+    },
+  }
+else
+  -- We are local on your NixOS machine -> Let Neovim use the native wl-clipboard provider
+  -- Note: Leaving g.clipboard undefined allows Neovim to automatically pick up wl-copy/wl-paste
+  vim.g.clipboard = nil
+end
+
+-- Sync standard yanks (like `y`, `d`, or visual selections) directly to the active clipboard register
 vim.opt.clipboard = "unnamedplus"
 
 -- ====================================================================
